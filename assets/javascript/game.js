@@ -1,21 +1,31 @@
-// <!-- the hangman game area -->
-//     <!-- wins and loses value -->
-//     <!-- array for potential words -->
-//<!-- display for the potential word all underined untill correct guess -->
-//<!-- remaining guesses value -->
-//<!-- an array that collects old used letters and displayes them -->
-
-
-
-
-var wins = document.getElementById()
+var wins = document.getElementById("#wins")
 var wins = 0
 
-var loses = document.getElementById()
-var loses = 0
+var losses = document.getElementById("#losses")
+var losses = 0
 
-var guesses = document.getElementById()
-var guesses = 15
 
-var wins = document.getElementById()
-var wins = document.getElementById()
+var guess = 15
+
+var allWords = ["Banana","Orange","Guava","Strawberry"]
+
+var chosenWord = document.getElementById("#chosenWord")
+
+var oldGuess = document.getElementById("#oldGuess")
+var oldGuess = []
+
+var start = document.getElementById("#start")
+
+
+$(document).ready(function() {
+
+    $(start).on("click", function() {
+        chosenWord = Math.random(allWords.length)
+        console.log(chosenWord)
+        targetDiv.textContent = chosenWord;
+        $("#start").text(chosenWord)
+    });
+
+})
+
+var guess = document.getElementById("#guess")
