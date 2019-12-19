@@ -4,6 +4,7 @@ var guess = 15;
 var totalGuess = 15;
 $("#guess").text(guess);
 
+var oldGuess = [];
 
 var allWords = ["Banana","Orange","Guava","Strawberry"];
 
@@ -11,6 +12,7 @@ var allWords = ["Banana","Orange","Guava","Strawberry"];
 function updateHTML() {
     
     $("#guess").text(guess);
+    $("#oldGuess").text(oldGuess);
 
 };
 
@@ -18,7 +20,7 @@ function updateHTML() {
 function reStart(){
     guess = totalGuess
     var chosenWord = [Math.floor(Math.random() * allWords.length)];
-    $("#chosenWord").replaceWith(allWords[chosenWord]);
+    $("#chosenWord").text(allWords[chosenWord]);
     console.log(allWords[chosenWord]);
 };
 
@@ -32,10 +34,19 @@ $(document).ready(function() {
     });
 
     // when key is pressed most logic happens
-    document.onkeyup = function(){
+    document.onkeyup = function(letter){
 
         guess--;
         console.log(guess);
+
+        oldGuess.push(letter)
+
+        // it needs to check if the key is from the alphabet
+        // it needs to check if its been pressed before
+        // push old wrong keys into the oldGuess array
+
+
+        // a victory condition somehow
 
         // loss statement
         if (guess === 0){
