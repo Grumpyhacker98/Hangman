@@ -1,0 +1,32 @@
+div{
+    text-align: center;
+}
+
+header{
+    text-align: center;
+    background-color: blue;
+    font-weight: bolder;
+    margin: 50px;
+    padding: 20px;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: blue;
+    text-align: center;
+    padding: 20px;
+}
+
+h1{
+    font-size: larger;
+}
+
+h2{
+    font-size: large;
+}
+
+p{
+    font-size: medium;
+}
