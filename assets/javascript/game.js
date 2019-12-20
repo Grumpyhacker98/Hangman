@@ -1,15 +1,12 @@
 
-// guess value and value used to restart the game along with initial display command
 var guess = 15;
 var totalGuess = 15;
-$("#guess").text(guess);
-
-var oldGuess = [];
 
 var allWords = ["Banana","Orange","Guava","Strawberry"];
+var chosenWord = [];
 
 var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
+var oldGuess = [];
 
 // keeps html updated
 function updateHTML() {
@@ -19,44 +16,73 @@ function updateHTML() {
 
 };
 
-// restarts Gamepad, having issues chosing new word it was working earlier
-function reStart(){
-    // other reset stuff
-    guess = totalGuess
-    oldGuess = [];
-
-    // guesses new word
-    var chosenWord = [Math.floor(Math.random() * allWords.length)];
-    $("#chosenWord").text(allWords[chosenWord]);
-    console.log(allWords[chosenWord]);
-};
 
 $(document).ready(function() {
 
     // (re)start button
     $("#start").on("click", function() {
-        reStart()
+        // other reset stuff
+        guess = totalGuess;
+        oldGuess = [];
+        
+        // guesses new word
+        chosenWord = [];
+        var wordChoice = [Math.floor(Math.random() * allWords.length)];
+        chosenWord.push(allWords[wordChoice]);
+        $("#chosenWord").text(chosenWord);
+
         updateHTML();
     });
 
     // when key is pressed most logic happens
     document.onkeyup = function(event){
-
-        // it needs to check if the key is from the alphabet
-        // it needs to check if its been pressed before
-
-        // creates variable to contain the event key then pushes it into the oldguess array
         var currentGuess = event.key;
-        oldGuess.push(" " + currentGuess);
 
-        guess--;
+
+
+        // experimental code
+
+        // loop through the word and check every character
+        for (var i=0, j=chosenWord.length; i<j; i++) {
+
+            // correct guess if statement is just a congrats alert right now
+            if (currentGuess == chosenWord[i]){
+                console.log("you got this one right!");
+            };
+
+            // only alphabet characters are accepted
+            //  might need to nest the entire for loop in this
+            if(!currentGuess == letters){
+                console.log("thats not part of the alphabet!");
+            };
+
+            // ensures you dont press the same key twice
+            if (currentGuess == oldGuess){
+                console.log("you pressed the "+currentGuess+" key twice!");
+            };
+
+            // wrong guess if statement
+            if (!currentGuess == chosenWord[i]){
+                console.log("wrong!");
+                guess--;
+                oldGuess.push(currentGuess);
+            };
+            
+        };
+
+        
+
+
+        // experimental code ends
+
+
 
         // a victory condition somehow
 
         // loss statement
         if (guess === 0){
-            alert("you lose!")
-        }
+            alert("you lose!");
+        };
 
         updateHTML();
 
