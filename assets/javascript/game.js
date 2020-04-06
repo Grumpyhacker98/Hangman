@@ -48,7 +48,9 @@ function ConvertToPuzzle(word) {
             this.array[i].printLetter()
         }
         newPrint = printArr.join("|")
-        console.log("|" + newPrint + "|")
+        finalPrint = "|" + newPrint + "|"
+        console.log(finalPrint)
+        return finalPrint
     }
 
     // looks through every letter to see if the guess is correct
@@ -100,11 +102,12 @@ $(document).ready(function () {
         word = new ConvertToPuzzle(words[Math.floor(Math.random() * 3)])
         count = maxCount
         guessArr = []
-        word.print()
-
+        $("#attempts-left").html(count)
+        $("#the-word").html(word.print())
+        $("#attempts-failed").html(guessArr)
     });
 
-    // when key is pressed it is lowercased and parsed  into gamecycle
+    // when key is pressed it is lowercased and parsed into gamecycle
     document.onkeyup = function (event) {
         if(gameStart){
             askQuestion(event.key.toLowerCase())
@@ -120,6 +123,7 @@ function askQuestion(guess) {
     // reasks question if guess is longer than 1 character or non alphabet or empty
     if (guess.length > 1 || !/^[a-z]*$/g.test(guess) || guess === " ") {
         console.log("unacceptable guess")
+        $("#talk-box").html("there is something with your guess that is unacceptable")
         return false;
     }
 
@@ -127,6 +131,7 @@ function askQuestion(guess) {
     for (var i = 0; i < guessArr.length; i++) {
         if (guess === guessArr[i]) {
             console.log("You have guessed this choice before")
+            $("#talk-box").html("You have tried this guess before")
             return false;
         }
     }
@@ -134,8 +139,11 @@ function askQuestion(guess) {
     // use constructor to find true false on guess
     if (word.guess(guess)) {
         console.log("Correct")
+        $("#talk-box").html("Correct")
+        guessArr.push(guess)
     } else {
         console.log("Incorrect")
+        $("#talk-box").html("Incorrect")
         guessArr.push(guess)
         count--;
     }
@@ -146,18 +154,24 @@ function askQuestion(guess) {
         console.log("Congratulations! You Won!")
         console.log("The word was: " + word.word)
         console.log("=================================")
-        // startGame()
+        $("#talk-box").html("You won!")
+        $("#the-word").html("The word was "+word.word)
         return false;
     }
+
+    console.log("Attempts left: " + count)
+    $("#attempts-left").html(count)
 
     // countdown
     if (count > 0) {
         console.log("Wrong tries: " + guessArr)
-        word.print()    
-        console.log("Attempts left: " + count)
+        $("#attempts-failed").html(guessArr)
+        $("#the-word").html(word.print())
     } else {
         console.log("Sorry, but you lost!")
         console.log("The word was: " + word.word)
+        $("#talk-box").html("Sorry, but you lost")
+        $("#the-word").html("the word was "+word.word)
         gameStart = false
     }
 }

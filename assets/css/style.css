@@ -4,7 +4,6 @@ div{
 
 header{
     text-align: center;
-    background-color: blue;
     font-weight: bolder;
     margin: 50px;
     padding: 20px;
@@ -14,7 +13,6 @@ footer{
     bottom: 0;
     right: 0;
     width: 100%;
-    background-color: blue;
     text-align: center;
     padding: 20px;
 }
