@@ -3,8 +3,8 @@
 
 <head>
     <title>Hangman</title>
-    <!-- <link href="assets/css/reset.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet"> -->
+    <link href="assets/css/reset.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -17,38 +17,37 @@
 
     <!-- something somethign western hangman -->
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container">
+        <div class="row p-4">
             <div class="col-12 d-flex justify-content-center">
                 <h1>Hangman!</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-                <h2>Remaining Guesses:
-                    <h2 id="attempts-left"></h2>
-                </h2>
+        <div class="row p-4">
+            <div class="col-md-6 d-flex justify-content-center">
+                <h2>Remaining Guesses:  <h2 id="attempts-left"></h2></h2>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <button id="start">(Re)Start Game</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row p-4">
+            <div class="col-md-6 d-flex justify-content-center">
+                <h2>Previous guesses: </h2>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <h2 class="p-2" id="attempts-failed"></h2>
+            </div>
+        </div>
+        <div class="row p-4">
             <div class="col-12 d-flex justify-content-center">
-                <h2>Previous guesses: <p id="attempts-failed"></p>
-                </h2>
+                <h2 id="talk-box">Would you like to play a game of hangman? Click start game and press keys to hazard a guess!</h2>
             </div>
         </div>
         <div class="d-flex justify-content-center">
             <h2 id="the-word"></h2>
         </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-                <h2 id="talk-box">Would you like to play a game of hangman?</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-                <button id="start">(Re)Start Game</button>
-            </div>
-        </div>
+
     </div>
 
     <script src="assets/javascript/game.js"></script>
