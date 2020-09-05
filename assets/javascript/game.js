@@ -92,12 +92,11 @@ var gamestart = false
 
 const maxCount = 7
 
-
+// player interactions
 $(document).ready(function () {
 
     // (re)start button
     $("#start").on("click", function () {
-
         gameStart = true
         word = new ConvertToPuzzle(words[Math.floor(Math.random() * 3)])
         count = maxCount
@@ -105,11 +104,12 @@ $(document).ready(function () {
         $("#attempts-left").html(count)
         $("#the-word").html(word.print())
         $("#attempts-failed").html(guessArr)
+        $("#talk-box").html("Good Luck!")
     });
 
     // when key is pressed it is lowercased and parsed into gamecycle
     document.onkeyup = function (event) {
-        if(gameStart){
+        if (gameStart) {
             askQuestion(event.key.toLowerCase())
         }
     };
@@ -127,10 +127,9 @@ function askQuestion(guess) {
         return false;
     }
 
-    // checks to see if letter has been guessed b4 to prevent unneccisary counter losses
+    // checks to see if letter has been guessed b4 to prevent unneccesary counter losses
     for (var i = 0; i < guessArr.length; i++) {
         if (guess === guessArr[i]) {
-            console.log("You have guessed this choice before")
             $("#talk-box").html("You have tried this guess before")
             return false;
         }
@@ -138,40 +137,39 @@ function askQuestion(guess) {
 
     // use constructor to find true false on guess
     if (word.guess(guess)) {
-        console.log("Correct")
-        $("#talk-box").html("Correct")
+        $("#talk-box").html(guess + " was correct")
         guessArr.push(guess)
     } else {
-        console.log("Incorrect")
-        $("#talk-box").html("Incorrect")
+        $("#talk-box").html(guess + " was incorrect")
         guessArr.push(guess)
         count--;
     }
 
     // if all letter.bool values are true then it will return true and run victory
     if (word.winCon()) {
-        console.log("=================================")
-        console.log("Congratulations! You Won!")
-        console.log("The word was: " + word.word)
-        console.log("=================================")
+        gamestart = false
         $("#talk-box").html("You won!")
-        $("#the-word").html("The word was "+word.word)
+        $("#the-word").html("The word was " + word.word)
         return false;
     }
 
-    console.log("Attempts left: " + count)
     $("#attempts-left").html(count)
+
+    var printAttempts = []
+    for (i = 0; i < guessArr.length; i++) {
+        printAttempts.push(guessArr[i])
+        if(guessArr.length!==i){
+            printAttempts.push(", ")
+        }
+    }
 
     // countdown
     if (count > 0) {
-        console.log("Wrong tries: " + guessArr)
-        $("#attempts-failed").html(guessArr)
+        $("#attempts-failed").html(printAttempts)
         $("#the-word").html(word.print())
     } else {
-        console.log("Sorry, but you lost!")
-        console.log("The word was: " + word.word)
         $("#talk-box").html("Sorry, but you lost")
-        $("#the-word").html("the word was "+word.word)
+        $("#the-word").html("The word was " + word.word)
         gameStart = false
     }
 }
