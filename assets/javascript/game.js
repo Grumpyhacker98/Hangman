@@ -122,8 +122,7 @@ function askQuestion(guess) {
 
     // reasks question if guess is longer than 1 character or non alphabet or empty
     if (guess.length > 1 || !/^[a-z]*$/g.test(guess) || guess === " ") {
-        console.log("unacceptable guess")
-        $("#talk-box").html("there is something with your guess that is unacceptable")
+        $("#talk-box").html("There is something with your guess that is unacceptable")
         return false;
     }
 
