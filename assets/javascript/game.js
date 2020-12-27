@@ -108,6 +108,7 @@ $(document).ready(function () {
         $("#the-word").html(word.print());
         $("#attempts-failed").html(guessArr);
         $("#talk-box").html("Good Luck!");
+        $("#image").attr("src", "./assets/pictures/1.png");
     });
 
     // when key is pressed it is lowercased and parsed into gamecycle
