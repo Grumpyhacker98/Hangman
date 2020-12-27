@@ -1,6 +1,6 @@
 // constructors
 // =====================================================================================================
-// gives every letter variables and for loops to collect it all again and display the users progress
+// gives every individual letter variables and fucnctions to collect data in order to display the users progress
 function newLetter(char) {
 
     this.char = char
@@ -57,7 +57,7 @@ function ConvertToPuzzle(word) {
     // needs to return trueGuess instead of straight true value becouse if its in the if statement it wont reveal multi char correct awnsers
     this.guess = function (arg) {
         trueGuess = false
-        for (var i = 0; i < this.array.length; i++) {
+        for (i in this.array) {
             if (this.array[i].check(arg)) {
                 trueGuess = true
             }
@@ -68,7 +68,7 @@ function ConvertToPuzzle(word) {
     // if every letter.boolien value is true retun true so hangman.js can run congrats victory code
     this.winCon = function () {
         winScore = 0
-        for (var i = 0; i < this.array.length; i++) {
+        for (i in this.array) {
             if (this.array[i].bool) {
                 winScore++
             }
@@ -85,7 +85,7 @@ function ConvertToPuzzle(word) {
 // ==============================================================
 
 // word bank
-var words = ["conundrum", "implication", "onamonapia"]
+var words = ["conundrum", "implication", "onamonapia", "breakfast", "bethoven", "lightning", "thunder"]
 var guessArr = [];
 
 var gamestart = false
@@ -157,7 +157,7 @@ function askQuestion(guess) {
     var printAttempts = []
     for (i = 0; i < guessArr.length; i++) {
         printAttempts.push(guessArr[i])
-        if(guessArr.length!==i){
+        if (guessArr.length !== i) {
             printAttempts.push(", ")
         }
     }
