@@ -85,32 +85,32 @@ function ConvertToPuzzle(word) {
 // ==============================================================
 
 // word bank
-var words = ["conundrum", "implication", "onamonapia", "breakfast", "bethoven", "lightning", "thunder"]
+var words = ["conundrum", "implication", "onamonapia", "breakfast", "bethoven", "lightning", "thunder"];
 var guessArr = [];
 
-var gamestart = false
+var gamestart = false;
 
-const maxCount = 7
+const maxCount = 7;
 
 // player interactions
 $(document).ready(function () {
 
     // (re)start button
     $("#start").on("click", function () {
-        gameStart = true
-        word = new ConvertToPuzzle(words[Math.floor(Math.random() * 3)])
-        count = maxCount
-        guessArr = []
-        $("#attempts-left").html(count)
-        $("#the-word").html(word.print())
-        $("#attempts-failed").html(guessArr)
-        $("#talk-box").html("Good Luck!")
+        gameStart = true;
+        word = new ConvertToPuzzle(words[Math.floor(Math.random() * 3)]);
+        count = maxCount;
+        guessArr = [];
+        $("#attempts-left").html(count);
+        $("#the-word").html(word.print());
+        $("#attempts-failed").html(guessArr);
+        $("#talk-box").html("Good Luck!");
     });
 
     // when key is pressed it is lowercased and parsed into gamecycle
     document.onkeyup = function (event) {
         if (gameStart) {
-            askQuestion(event.key.toLowerCase())
+            askQuestion(event.key.toLowerCase());
         }
     };
 
@@ -122,53 +122,54 @@ function askQuestion(guess) {
 
     // reasks question if guess is longer than 1 character or non alphabet or empty
     if (guess.length > 1 || !/^[a-z]*$/g.test(guess) || guess === " ") {
-        $("#talk-box").html("There is something with your guess that is unacceptable")
+        $("#talk-box").html("There is something with your guess that is unacceptable");
         return false;
     }
 
     // checks to see if letter has been guessed b4 to prevent unneccesary counter losses
     for (var i = 0; i < guessArr.length; i++) {
         if (guess === guessArr[i]) {
-            $("#talk-box").html("You have tried this guess before")
+            $("#talk-box").html("You have tried this guess before");
             return false;
         }
     }
 
     // use constructor to find true false on guess
     if (word.guess(guess)) {
-        $("#talk-box").html(guess + " was correct")
-        guessArr.push(guess)
+        $("#talk-box").html(guess + " was correct");
+        guessArr.push(guess);
     } else {
-        $("#talk-box").html(guess + " was incorrect")
-        guessArr.push(guess)
+        $("#talk-box").html(guess + " was incorrect");
+        guessArr.push(guess);
         count--;
     }
 
     // if all letter.bool values are true then it will return true and run victory
     if (word.winCon()) {
-        gamestart = false
-        $("#talk-box").html("You won!")
-        $("#the-word").html("The word was " + word.word)
+        gamestart = false;
+        $("#talk-box").html("You won!");
+        $("#the-word").html("The word was " + word.word);
         return false;
     }
 
-    $("#attempts-left").html(count)
+    $("#attempts-left").html(count);
 
-    var printAttempts = []
-    for (i = 0; i < guessArr.length; i++) {
-        printAttempts.push(guessArr[i])
+    var printAttempts = [];
+    for (i in guestArr) {
+        printAttempts.push(guessArr[i]);
         if (guessArr.length !== i) {
-            printAttempts.push(", ")
+            printAttempts.push(", ");
         }
     }
 
     // countdown
     if (count > 0) {
-        $("#attempts-failed").html(printAttempts)
-        $("#the-word").html(word.print())
+        $("#attempts-failed").html(printAttempts);
+        $("#the-word").html(word.print());
     } else {
-        $("#talk-box").html("Sorry, but you lost")
-        $("#the-word").html("The word was " + word.word)
-        gameStart = false
+        $("#talk-box").html("Sorry, but you lost");
+        alert("Sorry, but you lost, would you like to restart?");
+        $("#the-word").html("The word was " + word.word);
+        gameStart = false;
     }
 }
