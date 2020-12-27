@@ -84,11 +84,14 @@ function ConvertToPuzzle(word) {
 // primary game frame
 // ==============================================================
 
+// var victim1 = require("../pictures/1.png")
+// import victim1 from "../pictures/1.png"
+
 // word bank
 var words = ["conundrum", "implication", "onamonapia", "breakfast", "bethoven", "lightning", "thunder"];
 var guessArr = [];
 
-var gamestart = false;
+var gameStart = false;
 
 const maxCount = 7;
 
@@ -127,7 +130,7 @@ function askQuestion(guess) {
     }
 
     // checks to see if letter has been guessed b4 to prevent unneccesary counter losses
-    for (var i = 0; i < guessArr.length; i++) {
+    for (i in guessArr) {
         if (guess === guessArr[i]) {
             $("#talk-box").html("You have tried this guess before");
             return false;
@@ -155,11 +158,35 @@ function askQuestion(guess) {
     $("#attempts-left").html(count);
 
     var printAttempts = [];
-    for (i in guestArr) {
+    for (i in guessArr) {
         printAttempts.push(guessArr[i]);
         if (guessArr.length !== i) {
             printAttempts.push(", ");
         }
+    }
+
+    switch (count) {
+        case 6:
+            $("#image").attr("src", "./assets/pictures/2.png");
+            break;
+        case 5:
+            $("#image").attr("src", "./assets/pictures/3.png");
+            break;
+        case 4:
+            $("#image").attr("src", "./assets/pictures/4.png");
+            break;
+        case 3:
+            $("#image").attr("src", "./assets/pictures/5.png");
+            break;
+        case 2:
+            $("#image").attr("src", "./assets/pictures/6.png");
+            break;
+        case 1:
+            $("#image").attr("src", "./assets/pictures/7.png");
+            break;
+        case 0:
+            $("#image").attr("src", "./assets/pictures/8.png");
+            break;
     }
 
     // countdown
